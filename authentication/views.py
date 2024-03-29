@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from . forms import CreateUserForm, LoginForm
 
-from django.contrib.auth.decorators import login_required
-
 # - Authentication models and functions
 
 from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
 
 
 # Create your views here.
@@ -32,16 +30,11 @@ def login(request):
 
                 auth.login(request, user)
 
-                return redirect("dashboard")
+                return redirect("conversation/chats")
 
     context = {'loginform': form}
 
-    return render(request, "login.html", context)
-
-
-@login_required(login_url="login")
-def dashboard(request):
-    return render(request, "dashboard.html")
+    return render(request, "authentication/login.html", context)
 
 
 def register(request):
@@ -56,7 +49,7 @@ def register(request):
 
     context = {'registerform': form}
 
-    return render(request, 'register.html', context=context)
+    return render(request, 'authentication/register.html', context=context)
 
 
 def user_logout(request):
