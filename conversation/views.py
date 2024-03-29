@@ -14,23 +14,23 @@ def chat(request, chat_id):
     messages = Message.objects.filter(
         conversation_id=chat_id).order_by('created_at')
 
-    form = MessageForm()
+    # form = MessageForm()
 
-    if request.method == 'POST':
-        data = request.POST
-        print("DATA", data)
-        form = MessageForm(request.POST)
+    # if request.method == 'POST':
+    #     data = request.POST
+    #     form = MessageForm(request.POST)
 
-        if form.is_valid():
-            text = request.POST.get('text')
+    #     if form.is_valid():
+    #         text = request.POST.get('text')
 
-            conversation = Conversation.objects.get(id=chat_id)
-            message = Message(text=text, user=request.user,
-                              conversation=conversation)
-            message.save()
-            return HttpResponseRedirect('')
+    #         conversation = Conversation.objects.get(id=chat_id)
+    #         message = Message(text=text, user=request.user,
+    #                           conversation=conversation)
+    #         message.save()
+    #         return HttpResponseRedirect('')
 
-    context = {'chat': chat, 'messages': messages, 'messageform': form}
+    context = {'chat': chat, 'messages': messages,
+               'chat_id': chat_id}  # 'messageform': form
 
     return render(request, "chat.html", context)
 
