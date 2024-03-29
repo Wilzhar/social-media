@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  {% load static %}
   <p>Current user: {{user.id}}</p>
   {% if chat.user_1_id == user.id %}
   <h1>CHAT: {{ chat.user_2_id }}</h1>
@@ -35,49 +36,7 @@
   {{ chat_id|json_script:"chat-id" }}
   {{ request.user.id|json_script:"user-id" }}
 
-
-  <script>
-    const chatID = JSON.parse(document.getElementById('chat-id').textContent);
-    const userID = JSON.parse(document.getElementById('user-id').textContent);
-
-    const chatSocket = new WebSocket(
-      'ws://'
-      + window.location.host
-      + '/ws/conversation/chat/'
-      + chatID
-      + '/'
-    );
-
-    chatSocket.onmessage = function (e) {
-      const data = JSON.parse(e.data);
-      console.log("SENDING MESSAGE")
-      console.log(e.data)
-      document.querySelector('#chat-log').value += (data.message + '\n');
-    };
-
-    chatSocket.onclose = function (e) {
-      console.error('Chat socket closed unexpectedly');
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function (e) {
-      if (e.key === 'Enter') {  // enter, return
-        e.preventDefault();
-        document.querySelector('#chat-message-submit').click();
-      }
-    };
-
-    document.querySelector('#chat-message-submit').onclick = function (e) {
-      const messageInputDom = document.querySelector('#chat-message-input');
-      const message = messageInputDom.value;
-      chatSocket.send(JSON.stringify({
-        'message': message,
-        'user_id': userID,
-        'chat_id': chatID
-      }));
-      messageInputDom.value = ''
-    };
-  </script>
+  <script src="{% static 'js/chat_socket.js' %}"></script>
 </body>
 
 </html>

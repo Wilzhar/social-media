@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        print("CONNECT===================")
         self.room_name = self.scope["url_route"]["kwargs"]["chat_id"]
         self.room_group_name = f"chat_{self.room_name}"
 
@@ -20,13 +19,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        print("DISCONNECT===================")
         # Leave room group
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     # Receive message from WebSocket
     async def receive(self, text_data):
-        print("RECEIVE===================")
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         chat_id = text_data_json["chat_id"]
@@ -47,7 +44,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     # Receive message from room group
     async def chat_message(self, event):
-        print("CHAT MESSAGE===================")
         message = event["message"]
         chat_id = event["chat_id"]
         user_id = event["user_id"]
