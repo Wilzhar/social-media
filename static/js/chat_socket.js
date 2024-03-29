@@ -11,7 +11,16 @@ const chatSocket = new WebSocket(
 
 chatSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
-    document.querySelector('#chat-log').value += (data.message + '\n');
+
+    var ul = document.getElementById("chat-log");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(data.message));
+    if (userID == data.user_id) {
+        li.classList.add("bg-[#7743DB]", "text-white", "my-2", "p-2", "w-3/5", "ml-auto", "mr-0");
+    } else {
+        li.classList.add("bg-[#C3ACD0]", "text-white", "my-2", "p-2", "w-3/5", "ml-0", "mr-auto");
+    }
+    ul.appendChild(li);
 };
 
 chatSocket.onclose = function (e) {

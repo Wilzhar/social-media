@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %} Home Page {% endblock %}
+{% block content %}
+<ul>
+  {% for chat in chats %}
+  <li>
+    <a href="{% url 'chat' chat_id=chat.id %}">
+      <div class="h-16 bg-[#7743DB] w-auto top-0 flex items-center justify-start h-10 p-2 text-white my-1">
+        <img src="https://picsum.photos/200" alt="img" class="w-10 h-10 mr-2 bg-white rounded-full" />
+        {% if chat.user_1_id == user.id %}
+        <h1>{{ chat.user_2.username }}</h1>
+        {% else %}
+        <h1>{{ chat.user_1.username }}</h1>
+        {% endif %}
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
