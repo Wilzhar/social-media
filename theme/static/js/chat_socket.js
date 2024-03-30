@@ -21,6 +21,7 @@ chatSocket.onmessage = function (e) {
         li.classList.add("bg-[#C3ACD0]", "text-white", "my-2", "p-2", "w-3/5", "ml-0", "mr-auto");
     }
     ul.appendChild(li);
+    window.scrollBy(0, window.innerHeight);
 };
 
 chatSocket.onclose = function (e) {
@@ -34,7 +35,6 @@ document.querySelector('#chat-message-input').onkeyup = function (e) {
         document.querySelector('#chat-message-submit').click();
     }
 };
-
 document.querySelector('#chat-message-submit').onclick = function (e) {
     const messageInputDom = document.querySelector('#chat-message-input');
     const message = messageInputDom.value;
@@ -44,4 +44,15 @@ document.querySelector('#chat-message-submit').onclick = function (e) {
         'chat_id': chatID
     }));
     messageInputDom.value = ''
+    window.scrollBy(0, window.innerHeight);
 };
+
+
+function windowResized() {
+    const parent = document.querySelector(".parent");
+    document.querySelector(".child").style.width = `${parent.clientWidth - 16}px`;
+}
+
+window.addEventListener("resize", windowResized);
+windowResized();
+
