@@ -35,7 +35,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message_model = await self.get_message(chat_id)
 
         # Format date: March 30, 2024, 10:26 a.m.
-        created_at = message_model.created_at.strftime("%B %d, %Y, %H:%M %p")
+        created_at = message_model.created_at.strftime("%B %d, %Y, %I:%M %p")
 
         # Send message to room group
         await self.channel_layer.group_send(

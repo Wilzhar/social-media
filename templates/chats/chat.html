@@ -13,7 +13,7 @@
 
   <div class="flex justify-center">
     <button class="flex items-center" id="load-messages">
-      Get older messsage
+      Get older messsages
       {% heroicon_outline "arrow-path" size=40 class="ml-2" color="#7743DB" %}
     </button>
   </div>
@@ -22,13 +22,13 @@
     {% for message in messages reversed %}
     {% if user.id == message.user_id %}
     <li class="bg-[#7743DB] text-white my-2 p-2 w-3/5 ml-auto mr-0">
-      {{ message.text }}
-      <p>{{ message.created_at }}</p>
+      <p class="font-semibold">{{ message.text }}</p>
+      <p class="text-xs font-thin">{{ message.created_at }}</p>
     </li>
     {% else %}
     <li class="bg-[#C3ACD0] text-white my-2 p-2 w-3/5 ml-0 mr-auto">
-      {{ message.text }}
-      <p>{{ message.created_at }}</p>
+      <p class="font-semibold">{{ message.text }}</p>
+      <p class="text-xs font-thin">{{ message.created_at }}</p>
     </li>
     {% endif %}
     {% endfor %}

@@ -15,14 +15,14 @@ chatSocket.onmessage = function (e) {
     var time = formatDate(data.created_at);
     if (userID == data.user_id) {
         li = `<li class="bg-[#7743DB] text-white my-2 p-2 w-3/5 ml-auto mr-0">
-            ${data.message}
-            <p>${time}</p>
-        </li>`
+                <p class="font-semibold">${data.message}</p>
+                <p class="text-xs font-thin">${time}</p>
+            </li>`
     } else {
         li = `<li class="bg-[#C3ACD0] text-white my-2 p-2 w-3/5 ml-0 mr-auto">
-            ${data.message}
-            <p>${time}</p>
-        </li>`
+                <p class="font-semibold">${data.message}</p>
+                <p class="text-xs font-thin">${time}</p>
+            </li>`
     }
 
     ul.innerHTML += li
@@ -81,14 +81,14 @@ function loadmoreMessages() {
                 var time = formatDate(message.created_at);
                 if (userID == message.user_id) {
                     li = `<li class="bg-[#7743DB] text-white my-2 p-2 w-3/5 ml-auto mr-0">
-						${message.text}
-						<p>${time}</p>
-					</li>`
+                            <p class="font-semibold">${message.text}</p>
+                            <p class="text-xs font-thin">${time}</p>
+                        </li>`
                 } else {
                     li = `<li class="bg-[#C3ACD0] text-white my-2 p-2 w-3/5 ml-0 mr-auto">
-						${message.text}
-						<p>${time}</p>
-					</li>`
+                            <p class="font-semibold">${message.text}</p>
+                            <p class="text-xs font-thin">${time}</p>
+                        </li>`
                 }
                 ul.innerHTML = li + ul.innerHTML
             })
@@ -100,10 +100,10 @@ function loadmoreMessages() {
 }
 
 function formatDate(string_date) {
-    string_date = string_date.trim()
+    string_date = string_date.trim();
     if (string_date.endsWith("AM")) {
-        return string_date.substring(0, string_date.length - 2) + "a.m."
+        return string_date.substring(0, string_date.length - 2) + "a.m.";
     } else {
-        return string_date.substring(0, string_date.length - 2) + "p.m."
+        return string_date.substring(0, string_date.length - 2) + "p.m.";
     }
 }
