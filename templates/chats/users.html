@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block title %} Home Page {% endblock %}
+{% block content %}
+<ul>
+  {% for user in users %}
+  <li>
+    {% url 'chat' user_1_id=request.user.id user_2_id=user.id as myurl %}
+    {% include 'components/contact_card.html' with href=myurl image_path="https://picsum.photos/200" username=user.username %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
