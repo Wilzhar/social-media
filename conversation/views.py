@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 from .models import Conversation, Message
 
@@ -21,9 +22,7 @@ def chat(request, user_1_id, user_2_id):
             chat.save()
 
     messages = Message.objects.filter(
-        conversation_id=chat.id).order_by('created_at')
-
-    print(chat.user_1.username)
+        conversation_id=chat.id).order_by('-created_at')[:10]
 
     context = {'chat': chat, 'messages': messages,
                'chat_id': chat.id}
@@ -46,3 +45,23 @@ def chats(request):
 def users(request):
     users = User.objects.all
     return render(request, "chats/users.html", {"users": users})
+
+
+def load_messages(request):
+    chat_id = request.GET.get('chat_id')
+    offset = int(request.GET.get('offset'))
+    messages = Message.objects.filter(conversation_id=chat_id).order_by(
+        '-created_at')[offset:offset+10]
+    messages_list = []
+    for message in messages:
+        created_at = message.created_at.strftime("%B %d, %Y, %I:%M %p")
+        message_list = {
+            'created_at': created_at,
+            'text': message.text,
+            'user_id': message.user.id
+        }
+        messages_list.append(message_list)
+    data = {
+        'messages': messages_list
+    }
+    return JsonResponse(data=data)
