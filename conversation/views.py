@@ -54,8 +54,9 @@ def load_messages(request):
         '-created_at')[offset:offset+10]
     messages_list = []
     for message in messages:
+        created_at = message.created_at.strftime("%B %d, %Y, %H:%M %p")
         message_list = {
-            'created_at': message.created_at,
+            'created_at': created_at,
             'text': message.text,
             'user_id': message.user.id
         }
