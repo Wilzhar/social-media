@@ -12,8 +12,7 @@ const chatSocket = new WebSocket(
 chatSocket.onmessage = function (e) {
 	const data = JSON.parse(e.data);
 	var ul = document.getElementById("chat-log");
-	var time = data.created_at.replace("AM", "a.m.");
-	time = time.replace("PM", "p.m.");
+	var time = formatDate(data.created_at);
 	if (userID == data.user_id) {
 		li = `<li class="bg-[#7743DB] text-white my-2 p-2 w-3/5 ml-auto mr-0">
             ${data.message}
@@ -79,8 +78,7 @@ function loadmoreMessages() {
 		success: function (response) {
 			const data = response.messages
 			data.map(message => {
-				var time = message.created_at.replace("AM", "a.m.");
-				time = time.replace("PM", "p.m.");
+				var time = formatDate(message.created_at);
 				if (userID == message.user_id) {
 					li = `<li class="bg-[#7743DB] text-white my-2 p-2 w-3/5 ml-auto mr-0">
 						${message.text}
@@ -99,4 +97,13 @@ function loadmoreMessages() {
 			console.log(err);
 		},
 	});
+}
+
+function formatDate(string_date) {
+	string_date = string_date.trim()
+	if (string_date.endsWith("AM")) {
+		return string_date.substring(string_date.length - 2) + "a.m."
+	} else {
+		return string_date.substring(string_date.length - 2) + "p.m."
+	}
 }
