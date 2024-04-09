@@ -142,7 +142,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'theme/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -171,6 +171,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # <-- Updated!
+STATIC_ROOT = BASE_DIR / 'theme'  # <-- Updated!
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
