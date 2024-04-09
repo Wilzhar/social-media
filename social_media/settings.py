@@ -35,7 +35,7 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
 
 
 # Application definition
