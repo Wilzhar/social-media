@@ -1,7 +1,9 @@
 *sqlite3
+*sqlite
 *.log
 *.pot
 *.pyc
 __pycache__
 .venv
 .env
+staticfiles/
