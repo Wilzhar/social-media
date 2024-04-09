@@ -1100,14 +1100,6 @@ select {
   font-weight: 100;
 }
 
-.font-black {
-  font-weight: 900;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
 .leading-normal {
   line-height: 1.5;
 }
