@@ -1,1 +1,1 @@
-web: gunicorn 'social_media.wsgi'
+web: python manage.py migrate && gunicorn 'social_media.wsgi'
