@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm
 
 # - Authentication models and functions
 
@@ -15,6 +15,10 @@ def home(request):
 
 
 def login(request):
+
+    if request.user.is_authenticated:
+        return redirect("conversation/chats")
+
     form = LoginForm()
 
     if request.method == 'POST':
@@ -38,6 +42,10 @@ def login(request):
 
 
 def register(request):
+
+    if request.user.is_authenticated:
+        return redirect("conversation/chats")
+
     form = CreateUserForm()
     if request.method == "POST":
         form = CreateUserForm(request.POST)
