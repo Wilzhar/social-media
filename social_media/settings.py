@@ -35,7 +35,7 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
 
 
 # Application definition
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'theme',
     'authentication',
     'conversation',
-    'django_browser_reload',
+    # 'django_browser_reload',
     'heroicons',
 ]
 
